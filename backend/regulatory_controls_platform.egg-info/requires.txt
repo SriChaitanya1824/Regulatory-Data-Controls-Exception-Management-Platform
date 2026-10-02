@@ -1,0 +1,16 @@
+fastapi<1,>=0.115
+uvicorn[standard]<1,>=0.30
+sqlalchemy<3,>=2.0
+psycopg[binary]<4,>=3.2
+pydantic-settings<3,>=2.5
+pyjwt<3,>=2.9
+pwdlib[argon2]<1,>=0.2
+python-multipart<1,>=0.0.12
+structlog<26,>=24.4
+alembic<2,>=1.13
+
+[dev]
+pytest<9,>=8.3
+httpx<1,>=0.27
+ruff<1,>=0.7
+mypy<2,>=1.12

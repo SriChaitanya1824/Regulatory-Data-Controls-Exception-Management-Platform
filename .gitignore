@@ -1,0 +1,15 @@
+.env
+.venv*/
+__pycache__/
+*.py[cod]
+*.db
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+node_modules/
+dist/
+storage/evidence/*
+!storage/evidence/.gitkeep
+airflow/logs/
+airflow/airflow.db
+.DS_Store
