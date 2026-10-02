@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment: {POSTGRES_DB: governance, POSTGRES_USER: governance, POSTGRES_PASSWORD: governance}
+    volumes: [postgres_data:/var/lib/postgresql/data]
+    healthcheck: {test: ["CMD-SHELL", "pg_isready -U governance"], interval: 5s, timeout: 3s, retries: 15}
+  backend:
+    build: ./backend
+    env_file: .env
+    volumes: [evidence_data:/app/storage/evidence]
+    ports: ["8000:8000"]
+    depends_on: {postgres: {condition: service_healthy}}
+    healthcheck: {test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"], interval: 10s, timeout: 3s, retries: 10}
+  frontend:
+    build: ./frontend
+    ports: ["5173:80"]
+    depends_on: {backend: {condition: service_healthy}}
+  airflow:
+    image: apache/airflow:2.10.3-python3.12
+    user: "${AIRFLOW_UID:-50000}:0"
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/airflow.db
+      PLATFORM_API_URL: http://backend:8000/api
+      PLATFORM_USER: analyst@example.com
+      PLATFORM_PASSWORD: Governance2026!
+    volumes: [./airflow/dags:/opt/airflow/dags]
+    command: standalone
+    ports: ["8080:8080"]
+    depends_on: {backend: {condition: service_healthy}}
+volumes: {postgres_data: {}, evidence_data: {}}
