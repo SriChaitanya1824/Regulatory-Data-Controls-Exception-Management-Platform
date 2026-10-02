@@ -1,0 +1,3 @@
+# Data model
+
+Divisions contain assets; assets contain fields and reference owner/steward users. Controls have many executions, each bound to one asset. Exceptions optionally reference an execution and/or finding and always reference a division. Plans, evidence, comments, and status history are exception children. Audit events use entity type/id to cover cross-domain activity. AI audit records preserve feature, provider/mode, input reference, output, user, time, and acceptance state. Natural references (`control_code`, `finding_reference`, `exception_reference`) are unique; operational filter columns are indexed.

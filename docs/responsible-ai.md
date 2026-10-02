@@ -1,0 +1,3 @@
+# Responsible AI
+
+The assistant supports finding summaries, remediation suggestions, duplicate candidates, and evidence checklists. Responses display “AI-generated recommendation — Requires human review.” Without credentials the provider explicitly identifies itself as a deterministic demo fallback. AI outputs cannot trigger status transitions, approve evidence, assign accountability, alter severity, merge duplicates, or close exceptions. Every call records feature, provider, reference, full generated structure, user, timestamp, and review state. A future provider adapter must retain these boundaries and add prompt/model version, safety evaluation, and retention controls.

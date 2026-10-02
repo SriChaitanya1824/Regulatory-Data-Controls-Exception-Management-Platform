@@ -1,0 +1,3 @@
+# Governance controls
+
+The engine registers ten seeded controls. Ownership and stewardship inspect critical-asset assignments. CDE definition queries field descriptions. Lineage checks `regulatory_relevance` and `lineage_count`. Data quality applies criticality-sensitive thresholds. Classification, metadata, regulatory mapping, documentation, and review-age rules inspect stored asset facts. Every evaluation writes PASS, FAIL, or WARNING with measured and expected values; prior executions are never overwritten. Failed runs create an exception only when no unresolved exception exists for the same control and asset.
